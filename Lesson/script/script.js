@@ -9,7 +9,14 @@ let money,
     daysInMonth = 30;
 
 
-money = +prompt('Ваш месячный доход?', '');
+let start = function() {
+  do {
+    money = prompt('Ваш месячный доход?', '');
+  } while (isNaN(money) || money === '' || money === null);
+};
+
+start();
+
 addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', '');
 
 deposit = confirm('Есть ли у вас депозит в банке?');
@@ -56,11 +63,16 @@ let accumulatedMonth = getAccumulatedMonth();
 console.log('Накопления за период: ' + accumulatedMonth);
 
 // считаем кол-во месяцев для достижения mission
-function getTargetMonth() {
+let getTargetMonth = function() {
   let monthCompleteMission = mission / accumulatedMonth;
+  Math.floor(monthCompleteMission);
   return Math.floor(monthCompleteMission);
+};
+if (getTargetMonth() > 0) {
+  console.log('Для достижения цели требуется: ' + getTargetMonth() + ' месяца.');
+} else {
+  console.log('Цель не будет достигнута');
 }
-console.log('Для достижения цели требуется: ' + getTargetMonth() + ' месяца.');
 
 //бюджет на день
 let budgetDay = accumulatedMonth / daysInMonth;
