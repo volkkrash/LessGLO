@@ -4,8 +4,9 @@ let money;
 
 let start = function() {
   do {
-    money = +prompt('Ваш месячный доход?', '50000');
+    money = prompt('Ваш месячный доход?', '50000');
   } while (isNaN(money) || money === '' || money === null);
+  money = +money;
 };
     
 start();
@@ -90,5 +91,5 @@ if (appData.getTargetMonth() > 0) {
 
 console.log('Наша программа включает в себя данные:');
 for (let key in appData) {
-  console.log('Ключ: ' + key + ' содержит в себе значение: ' + appData[key]);
+  console.log(key + ' : ', appData[key]);
 }
