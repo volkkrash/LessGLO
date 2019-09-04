@@ -25,8 +25,8 @@ start();
               appData.deposit = confirm('Есть ли у вас депозит в банке?');
              
               for (let i = 0; i < 2; i++) {
-                let a = prompt ('Какие обязательные ежемесячные расходы у вас есть?', ''),
-                    b = +prompt ('Во сколько это обойдется?', '');
+                let a = prompt ('Какие обязательные ежемесячные расходы у вас есть?', 'Такие'),
+                    b = +prompt ('Во сколько это обойдется?', '5000');
             
                 if (typeof(a)==='string' && typeof(a) != null && typeof(b) != null && a != "" && b != "" && a.length < 50) {
                   appData.expenses[a] = b;
