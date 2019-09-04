@@ -46,7 +46,7 @@ appData.asking();
 
 // обязательные месячные расходы
 appData.getExpensesMonth = function() {
-  appData.expensesMonth = 0
+  appData.expensesMonth = 0;
   for (let key in appData.expenses) {
     appData.expensesMonth += appData.expenses[key];
   }
