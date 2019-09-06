@@ -17,9 +17,27 @@ start();
       expenses: {},
       addExpenses: [],
       deposit: false,
+      percentDeposit: 0,
+      moneyDeposit: 0,
       mission: 150000,
       period: 6,
       asking: function() {
+
+        if (confirm('Есть ли у вас дополнительный источник заработка?')) {
+          let itemIncome,
+              cashIncome;
+          do {
+          itemIncome = prompt('Какой у вас дополнительный заработок?', 'Пишу стихи');
+          }
+          while (itemIncome === '' || itemIncome === null);
+          do {
+          cashIncome = +prompt('Сколько в месяц вы на этом зарабатываете?', 3000);
+          }
+          while (isNaN(cashIncome) || cashIncome === '' || cashIncome === null);
+          appData.income[itemIncome] = cashIncome;
+        }
+
+
           let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'пиво,пиво,водочка');
               appData.addExpenses = addExpenses.toLowerCase().split(',');
               appData.deposit = confirm('Есть ли у вас депозит в банке?');
@@ -32,7 +50,7 @@ start();
                 }
                 while (a === '' || a === null);
                 do {
-                  b = prompt ('Во сколько это обойдется?', '5000');
+                  b = +prompt ('Во сколько это обойдется?', '5000');
                 }
                 while (isNaN(b) || b === '' || b === null);
                 appData.expenses[a] = b;
@@ -67,12 +85,30 @@ start();
         } else {
           return ('Что-то пошло не так');
         }
+      },
+      getInfoDeposit: function() {
+        if (appData.deposit) {
+          do {
+            appData.percentDeposit = +prompt('Какой годовой процент?', 10);
+            }
+            while (isNaN(appData.percentDeposit) || appData.percentDeposit === '' || appData.percentDeposit === null);
+          do {
+            appData.moneyDeposit = +prompt('Какая сумма заложена?', 10000);
+            }
+            while (isNaN(appData.moneyDeposit) || appData.moneyDeposit === '' || appData.moneyDeposit === null);
+        }
+      },
+      calcSavedMoney: function() {
+        return appData.budgetMonth * appData.period;
       }
     };
 
 appData.asking();
 appData.getExpensesMonth();
 appData.getBudget();
+if (appData.deposit) {
+  appData.getInfoDeposit();
+}
 
 
 
@@ -89,3 +125,15 @@ console.log('Наша программа включает в себя данны
 for (let key in appData) {
   console.log(key + ' : ', appData[key]);
 }
+
+
+// Возможные расходы (addExpenses) вывести строкой в консоль каждое слово с большой буквы слова разделены запятой и пробелом
+let expToStr = function(arr) {
+  let modifiedArr = [];
+  arr.forEach(function(item) {
+    let upperFirstElem = item[0].toUpperCase() + item.slice(1);
+    modifiedArr.push(upperFirstElem);
+  });
+  
+  return modArr.join(', ');
+};
