@@ -1,6 +1,7 @@
 "use strict";
 
-let money;
+let money,
+    cashIncome;
 
 let start = function() {
   do {
@@ -22,10 +23,8 @@ start();
       mission: 150000,
       period: 6,
       asking: function() {
-
         if (confirm('Есть ли у вас дополнительный источник заработка?')) {
-          let itemIncome,
-              cashIncome;
+          let itemIncome;
           do {
           itemIncome = prompt('Какой у вас дополнительный заработок?', 'Пишу стихи');
           }
@@ -73,7 +72,8 @@ start();
         return appData.expensesMonth;
       },
       getBudget: function() {
-        appData.budgetMonth = money - appData.expensesMonth;
+        appData.budgetMonth = money - appData.expensesMonth + cashIncome;
+        
         appData.budgetDay = appData.budgetMonth / 30;
       },
       getTargetMonth: function() {
@@ -114,7 +114,6 @@ appData.getBudget();
 if (appData.deposit) {
   appData.getInfoDeposit();
 }
-
 
 
 console.log(appData.getStatusIncome());
