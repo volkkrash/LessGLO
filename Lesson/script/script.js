@@ -55,7 +55,7 @@ start();
       },
       getTargetMonth: function() {
         let monthCompleteMission = appData.mission / appData.budgetMonth;
-        return Math.ceil(monthCompleteMission);
+        return Math.floor(monthCompleteMission);
       },
       getStatusIncome: function() {
         if (appData.budgetDay >= 800) {
