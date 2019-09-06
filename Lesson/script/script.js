@@ -135,5 +135,7 @@ let expToStr = function(arr) {
     modifiedArr.push(upperFirstElem);
   });
   
-  return modArr.join(', ');
+  return modifiedArr.join(', ');
 };
+
+console.log(expToStr(appData.addExpenses));
