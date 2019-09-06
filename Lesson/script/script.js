@@ -31,29 +31,34 @@ start();
           }
           while (itemIncome === '' || itemIncome === null);
           do {
-          cashIncome = +prompt('Сколько в месяц вы на этом зарабатываете?', 3000);
+          cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?', '3000');
           }
-          while (isNaN(cashIncome) || cashIncome === '' || cashIncome === null);
+          while (cashIncome === null || cashIncome === '' || isNaN(cashIncome));
+          cashIncome = +cashIncome;
+
           appData.income[itemIncome] = cashIncome;
         }
-
-
-          let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'пиво,пиво,водочка');
-              appData.addExpenses = addExpenses.toLowerCase().split(',');
-              appData.deposit = confirm('Есть ли у вас депозит в банке?');
+          let addExpenses;
+          do {
+          addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'пиво,пиво,водочка');
+          }
+          while (addExpenses === '' || addExpenses === null);
+          appData.addExpenses = addExpenses.toLowerCase().split(',');
+          
+          appData.deposit = confirm('Есть ли у вас депозит в банке?');
              
-              let a, b;
-              for (let i = 0; i < 2; i++) {
+          let a, b;
+          for (let i = 0; i < 2; i++) {
                 
-                do {
-                  a = prompt ('Какие обязательные ежемесячные расходы у вас есть?', 'Подруга' + (i+1));
-                }
-                while (a === '' || a === null);
-                do {
-                  b = +prompt ('Во сколько это обойдется?', '5000');
-                }
-                while (isNaN(b) || b === '' || b === null);
-                appData.expenses[a] = b;
+            do {
+              a = prompt ('Какие обязательные ежемесячные расходы у вас есть?', 'Подруга' + (i+1));
+            }
+            while (typeof(a) != 'string' || a === '' || a === null);
+            do {
+              b = +prompt ('Во сколько это обойдется?', '5000');
+            }
+            while (b  === 0 || isNaN(b) || b === '' || b === null);
+            appData.expenses[a] = b;
               }
         },
       budget: money,
@@ -89,13 +94,13 @@ start();
       getInfoDeposit: function() {
         if (appData.deposit) {
           do {
-            appData.percentDeposit = +prompt('Какой годовой процент?', 10);
+            appData.percentDeposit = +prompt('Какой годовой процент?', '10');
             }
-            while (isNaN(appData.percentDeposit) || appData.percentDeposit === '' || appData.percentDeposit === null);
+            while (appData.percentDeposit === 0 || isNaN(appData.percentDeposit) || appData.percentDeposit === '' || appData.percentDeposit === null);
           do {
-            appData.moneyDeposit = +prompt('Какая сумма заложена?', 10000);
+            appData.moneyDeposit = +prompt('Какая сумма заложена?', '10000');
             }
-            while (isNaN(appData.moneyDeposit) || appData.moneyDeposit === '' || appData.moneyDeposit === null);
+            while (appData.moneyDeposit === 0 || isNaN(appData.moneyDeposit) || appData.moneyDeposit === '' || appData.moneyDeposit === null);
         }
       },
       calcSavedMoney: function() {
