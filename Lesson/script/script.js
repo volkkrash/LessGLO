@@ -1,5 +1,7 @@
 "use strict";
 
+/*
+
 let money,
     cashIncome;
 
@@ -143,3 +145,37 @@ let expToStr = function(arr) {
 };
 
 console.log(expToStr(appData.addExpenses));
+
+*/
+
+
+
+// ========================================================
+
+let startBtn = document.querySelector('#start');
+console.log('startBtn: ', startBtn);
+let btnCollect = document.querySelectorAll('button');
+let addIncomeBtn = btnCollect[0],
+    addExpensesBtn = btnCollect[1],
+    depositCheck = document.querySelector('#deposit-check'),
+    additionalIncomeItems = document.querySelectorAll('.additional_income-item'),
+    resultTotal = document.querySelectorAll('.result-total'),
+    budgetDayVal = resultTotal[1],
+    expensesMonthVal = resultTotal[2],
+    additionalIncomeVal = resultTotal[3],
+    additionalExpensesVal = resultTotal[4],
+    incomePeriodVal = resultTotal[5],
+    targetMonthVal = resultTotal[6];
+
+let data = document.querySelector('.data'),
+    dataInputs = data.querySelectorAll('input'),
+    salaryAmount = dataInputs[0],
+    incomeTitle = dataInputs[1],
+    incomeAmount = dataInputs[2],
+    expensesTitle = dataInputs[5],
+    expensesAmount = dataInputs[6],
+    additionalExpensesItem = dataInputs[7],
+    depositAmount = dataInputs[9],
+    depositPercent = dataInputs[10],
+    targetAmount = dataInputs[11],
+    periodSelect = dataInputs[12];
