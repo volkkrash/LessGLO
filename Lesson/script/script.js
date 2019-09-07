@@ -152,30 +152,26 @@ console.log(expToStr(appData.addExpenses));
 
 // ========================================================
 
-let startBtn = document.querySelector('#start');
-console.log('startBtn: ', startBtn);
-let btnCollect = document.querySelectorAll('button');
-let addIncomeBtn = btnCollect[0],
-    addExpensesBtn = btnCollect[1],
+
+let startBtn = document.querySelector('#start'),
+    addIncomeButton = document.querySelector('.income button'),
+    addExpensesButton = document.querySelector('.expenses button'),
     depositCheck = document.querySelector('#deposit-check'),
     additionalIncomeItems = document.querySelectorAll('.additional_income-item'),
-    resultTotal = document.querySelectorAll('.result-total'),
-    budgetDayVal = resultTotal[1],
-    expensesMonthVal = resultTotal[2],
-    additionalIncomeVal = resultTotal[3],
-    additionalExpensesVal = resultTotal[4],
-    incomePeriodVal = resultTotal[5],
-    targetMonthVal = resultTotal[6];
+    budgetDayVal = document.querySelector('.budget_day-value'),
+    expensesMonthVal = document.querySelector('.expenses_month-value'),
+    additionalIncomeVal = document.querySelector('.additional_income-value'),
+    additionalExpensesVal = document.querySelector('.additional_expenses-value'),
+    incomePeriodVal = document.querySelector('.income_period-value'),
+    targetMonthVal = document.querySelector('.target_month-value');
 
-let data = document.querySelector('.data'),
-    dataInputs = data.querySelectorAll('input'),
-    salaryAmount = dataInputs[0],
-    incomeTitle = dataInputs[1],
-    incomeAmount = dataInputs[2],
-    expensesTitle = dataInputs[5],
-    expensesAmount = dataInputs[6],
-    additionalExpensesItem = dataInputs[7],
-    depositAmount = dataInputs[9],
-    depositPercent = dataInputs[10],
-    targetAmount = dataInputs[11],
-    periodSelect = dataInputs[12];
+let salaryAmount = document.querySelector('.salary-amount'),
+    incomeTitle = document.querySelector('.income-title'),
+    incomeAmount = document.querySelector('.income-amount'),
+    expensesTitle = document.querySelector('.expenses-title'),
+    expensesAmount = document.querySelector('.expenses-amount'),
+    additionalExpensesItem = document.querySelector('.additional_expenses-item'),
+    depositAmount = document.querySelector('.deposit-amount'),
+    depositPercent = document.querySelector('.deposit-percent'),
+    targetAmount = document.querySelector('.target-amount'),
+    periodSelect = document.querySelector('.period-select');
