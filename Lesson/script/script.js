@@ -41,14 +41,16 @@ let start = document.querySelector('#start'),
       moneyDeposit: 0,
       start: function() {
         if (salaryAmount.value === '') {
-          start.addEventListener('click', function(event){event.preventDefault();});
+          start.addEventListener('click', function(event) {
+            event.preventDefault();
+          });
           return;
         }
         appData.budget = +salaryAmount.value;
 
         let allInputs = document.querySelectorAll('.data input[type=text]');
         allInputs.forEach(function(item){
-          item.setAttribute("readonly", "readonly");
+          item.disabled = true;
         });
         start.style.display = 'none';
         cancel.style.display = 'inline-block';
@@ -67,15 +69,17 @@ let start = document.querySelector('#start'),
       },
       showResult: function() {
         budgetMonthVal.value = appData.budgetMonth;
-        budgetDayVal.value = appData.budgetDay.toFixed(2);
+        budgetDayVal.value = appData.budgetDay;
         expensesMonthVal.value = appData.expensesMonth;
         additionalExpensesVal.value = appData.addExpenses.join(', ');
         additionalIncomeVal.value = appData.addIncome.join(', ');
         targetMonthVal.value = Math.ceil(appData.getTargetMonth());
         incomePeriodVal.value = appData.calcPeriod();
 
-        periodSelect.addEventListener('change', function(){incomePeriodVal.value = appData.calcPeriod();});
-
+        
+        periodSelect.addEventListener('input', function() {
+          incomePeriodVal.value = appData.calcPeriod();
+        });
 
       },
       addExpensesBlock: function() {
@@ -143,7 +147,7 @@ let start = document.querySelector('#start'),
       getBudget: function() {
         appData.budgetMonth = appData.budget + appData.incomeMonth - appData.expensesMonth;
         
-        appData.budgetDay = appData.budgetMonth / 30;
+        appData.budgetDay = (appData.budgetMonth / 30).toFixed(2);
       },
       getTargetMonth: function() {
         let monthCompleteMission = targetAmount.value / appData.budgetMonth;
@@ -165,11 +169,11 @@ let start = document.querySelector('#start'),
           do {
             appData.percentDeposit = +prompt('Какой годовой процент?', '10');
             }
-            while (appData.percentDeposit === 0 || isNaN(appData.percentDeposit) || appData.percentDeposit === '' || appData.percentDeposit === null);
+            while (appData.percentDeposit === 0 || isNaN(appData.percentDeposit));
           do {
             appData.moneyDeposit = +prompt('Какая сумма заложена?', '10000');
             }
-            while (appData.moneyDeposit === 0 || isNaN(appData.moneyDeposit) || appData.moneyDeposit === '' || appData.moneyDeposit === null);
+            while (appData.moneyDeposit === 0 || isNaN(appData.moneyDeposit));
         }
       },
       calcPeriod: function() {
@@ -182,7 +186,9 @@ let start = document.querySelector('#start'),
 start.addEventListener('click', appData.start);
 addExpensesButton.addEventListener('click', appData.addExpensesBlock);
 addIncomeButton.addEventListener('click', appData.addIncomeBlock);
-periodSelect.addEventListener('change', function(){periodAmount.textContent = periodSelect.value;});
+periodSelect.addEventListener('input', function() {
+  periodAmount.textContent = periodSelect.value;
+});
 
 
 
