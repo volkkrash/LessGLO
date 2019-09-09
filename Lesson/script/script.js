@@ -147,7 +147,7 @@ let start = document.querySelector('#start'),
       getBudget: function() {
         appData.budgetMonth = appData.budget + appData.incomeMonth - appData.expensesMonth;
         
-        appData.budgetDay = (appData.budgetMonth / 30).toFixed(2);
+        appData.budgetDay = Math.floor((appData.budgetMonth / 30));
       },
       getTargetMonth: function() {
         let monthCompleteMission = targetAmount.value / appData.budgetMonth;
