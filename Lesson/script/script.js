@@ -58,6 +58,7 @@ let start = document.querySelector('#start'),
         });
         addExpensesButton.style.visibility = 'hidden';
         addIncomeButton.style.visibility = 'hidden';
+        periodSelect.disabled = true;
         start.style.display = 'none';
         cancel.style.display = 'inline-block';
         
@@ -95,6 +96,7 @@ let start = document.querySelector('#start'),
         };
         removeAddBlock(expensesItems);
         removeAddBlock(incomeItems);
+        periodSelect.removeAttribute('disabled', 'true');
         addExpensesButton.style.visibility = '';
         addIncomeButton.style.visibility = '';
         addExpensesButton.style.display = '';
@@ -103,6 +105,19 @@ let start = document.querySelector('#start'),
 
         cancel.style.display = 'none';
         start.style.display = 'inline-block';
+
+        this.budget = 0;
+        this.budgetDay = 0;
+        this.budgetMonth = 0;
+        this.expensesMonth = 0;
+        this.income = {};
+        this.incomeMonth = 0;
+        this.addIncome = [];
+        this.expenses = {};
+        this.addExpenses = [];
+        this.deposit = false;
+        this.percentDeposit = 0;
+        this.moneyDeposit = 0;
       },
       showResult: function() {
         budgetMonthVal.value = this.budgetMonth;
@@ -224,7 +239,7 @@ addIncomeButton.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('input', function() {
   periodAmount.textContent = periodSelect.value;
 });
-cancel.addEventListener('click', appData.reset);
+cancel.addEventListener('click', appData.reset.bind(appData));
 
 
 
