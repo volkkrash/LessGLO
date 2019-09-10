@@ -58,7 +58,6 @@ let start = document.querySelector('#start'),
         });
         addExpensesButton.style.visibility = 'hidden';
         addIncomeButton.style.visibility = 'hidden';
-        periodSelect.disabled = true;
         start.style.display = 'none';
         cancel.style.display = 'inline-block';
         
@@ -96,7 +95,6 @@ let start = document.querySelector('#start'),
         };
         removeAddBlock(expensesItems);
         removeAddBlock(incomeItems);
-        periodSelect.removeAttribute('disabled', 'true');
         addExpensesButton.style.visibility = '';
         addIncomeButton.style.visibility = '';
         addExpensesButton.style.display = '';
