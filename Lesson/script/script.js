@@ -249,7 +249,7 @@ let start = document.querySelector('#start'),
     };
 
    const appData = new AppData();
-   appData.eventListeners();
+   appData.eventsListeners();
    console.log('appData: ', appData);
 
 

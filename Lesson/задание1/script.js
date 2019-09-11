@@ -8,22 +8,19 @@ function DomElement(selector, height, width, bg, fontSize) {
 }
 
 DomElement.prototype.addElem = function() {
-  let el,
-      body = document.querySelector('body');
+  let el;
   if (this.selector[0] === '#') {
     el = document.createElement('p');
-    // el.textContent = 'Привет!!!!!!';
   } else if (this.selector[0] === '.') {
     el = document.createElement('div');
   } else {
     return;
   }
   
-  el.style.cssText = `height: ${elem.height}px; width: ${elem.width}px; background: ${elem.bg}; font-size: ${elem.fontSize}px;`;
-  // el.classList.add(`${elem.selector}`);
-  body.prepend(el);
+  el.style.cssText = `height: ${elem.height}; width: ${elem.width}; background: ${elem.bg}; font-size: ${elem.fontSize};`;
+  document.body.prepend(el);
 };
 
-let elem = new DomElement('.hello', '100', '100', 'red', '24');
+let elem = new DomElement('.hello', '100px', '100px', 'red', '24px');
 elem.addElem();
 console.log('elem: ', elem);
