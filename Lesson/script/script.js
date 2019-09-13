@@ -175,45 +175,6 @@ let start = document.querySelector('#start'),
         this.incomeMonth += +this.income[key];
       }
     };
-    // СОВМЕСТИТЬ ------------------------------------------------------------------------------------
-    // AppData.prototype.getAddExpenses = function() {
-    //   const addExpenses = additionalExpensesItem.value.split(',');
-    //   addExpenses.forEach((item) => {
-    //     item = item.trim();
-    //     if (item !== '') {
-    //       this.addExpenses.push(item);
-    //     }
-    //   });
-    // };
-
-
-    // AppData.prototype.getAddMoney = function(items, exportArr) {
-    //   let itemsArr;
-    //   if (typeof(items.value) === 'string') {
-    //     itemsArr = items.value.split(',');
-    //   } else {
-    //     itemsArr = items;
-    //   }
-    //   console.log(itemsArr);
-    //   itemsArr.forEach(function(item) {
-    //     let itemValue;
-    //     if (item.value === 'string' && item.value !== '') {
-    //       itemValue = item.value.trim();
-    //       console.log('exc:', item);
-    //       exportArr.push(itemValue);
-          
-    //     } else {
-    //       console.log('exp:', item);
-    //       item = item.trim();
-          
-    //       if (item !== ''){
-    //         exportArr.push(item);
-    //       }
-    //     }
-        
-    //   });
-    // };
-
     AppData.prototype.getAddMoney = function (items, exportArr) {
       if (typeof (items.value) === 'string') {
           items = items.value.split(',');
@@ -231,15 +192,6 @@ let start = document.querySelector('#start'),
           }
       });
     };
-
-    // AppData.prototype.getAddIncome = function() {
-    //   additionalIncomeItems.forEach((item) => {
-    //     let itemValue = item.value.trim();
-    //     if (itemValue !== ''){
-    //       this.addIncome.push(itemValue);
-    //     }
-    //   });
-    // };
     AppData.prototype.getExpensesMonth = function() {
       for (let key in this.expenses) {
         this.expensesMonth += +this.expenses[key];
