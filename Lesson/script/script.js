@@ -71,8 +71,8 @@ let start = document.querySelector('#start'),
       this.getInfoDeposit();
       // this.getAddExpenses();
       // this.getAddIncome();
-      this.getAddMoney(additionalExpensesItem, this.addExpenses);
       this.getAddMoney(additionalIncomeItems, this.addIncome);
+      this.getAddMoney(additionalExpensesItem, this.addExpenses);
       this.getBudget();
       
       this.showResult();
@@ -144,7 +144,6 @@ let start = document.querySelector('#start'),
       });
 
     };
-    // СОВМЕСТИТЬ ------------------------------------------------------------------------------------
     AppData.prototype.addBlock = function(clonedItems, button) {
       let cloneItem = clonedItems[0].cloneNode(true);
       clonedItems[0].parentNode.insertBefore(cloneItem, button);
@@ -187,15 +186,29 @@ let start = document.querySelector('#start'),
     //   });
     // };
     AppData.prototype.getAddMoney = function(items, exportArr) {
-      if (typeof(items) === 'string') {
-        items = items.value.split(',');
-        console.log(items);
+      let itemsArr;
+      if (typeof(items.value) === 'string') {
+        itemsArr = items.value.split(',');
+      } else {
+        itemsArr = items;
       }
-      items.forEach(function(item) {
-        let itemValue = item.value.trim();
-        if (itemValue !== ''){
+      console.log(itemsArr);
+      itemsArr.forEach(function(item) {
+        let itemValue;
+        if (item.value === 'string' && item.value !== '') {
+          itemValue = item.value.trim();
+          console.log('exc:', item);
           exportArr.push(itemValue);
+          
+        } else {
+          console.log('exp:', item);
+          item = item.trim();
+          
+          if (item !== ''){
+            exportArr.push(item);
+          }
         }
+        
       });
     };
     // AppData.prototype.getAddIncome = function() {
