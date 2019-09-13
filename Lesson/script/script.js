@@ -185,32 +185,53 @@ let start = document.querySelector('#start'),
     //     }
     //   });
     // };
-    AppData.prototype.getAddMoney = function(items, exportArr) {
-      let itemsArr;
-      if (typeof(items.value) === 'string') {
-        itemsArr = items.value.split(',');
-      } else {
-        itemsArr = items;
-      }
-      console.log(itemsArr);
-      itemsArr.forEach(function(item) {
-        let itemValue;
-        if (item.value === 'string' && item.value !== '') {
-          itemValue = item.value.trim();
-          console.log('exc:', item);
-          exportArr.push(itemValue);
+
+
+    // AppData.prototype.getAddMoney = function(items, exportArr) {
+    //   let itemsArr;
+    //   if (typeof(items.value) === 'string') {
+    //     itemsArr = items.value.split(',');
+    //   } else {
+    //     itemsArr = items;
+    //   }
+    //   console.log(itemsArr);
+    //   itemsArr.forEach(function(item) {
+    //     let itemValue;
+    //     if (item.value === 'string' && item.value !== '') {
+    //       itemValue = item.value.trim();
+    //       console.log('exc:', item);
+    //       exportArr.push(itemValue);
           
-        } else {
-          console.log('exp:', item);
-          item = item.trim();
+    //     } else {
+    //       console.log('exp:', item);
+    //       item = item.trim();
           
-          if (item !== ''){
-            exportArr.push(item);
-          }
-        }
+    //       if (item !== ''){
+    //         exportArr.push(item);
+    //       }
+    //     }
         
+    //   });
+    // };
+
+    AppData.prototype.getAddMoney = function (items, exportArr) {
+      if (typeof (items.value) === 'string') {
+          items = items.value.split(',');
+          console.log(items);
+      }
+  
+      items.forEach(function (item) {
+          if (typeof item == 'string') {
+              item = item.trim();
+          } else {
+              item = item.value.trim();
+          }
+          if (item !== ''){
+              exportArr.push(item);
+          }
       });
     };
+
     // AppData.prototype.getAddIncome = function() {
     //   additionalIncomeItems.forEach((item) => {
     //     let itemValue = item.value.trim();
