@@ -63,12 +63,12 @@ const
       addIncomeButton.style.visibility = 'hidden';
       start.style.display = 'none';
       cancel.style.display = 'inline-block';
-      
 
 
-      this.getExpenses();
-      this.getIncome();
-      this.getExpensesMonth();
+      this.getExpIncMoney('.expenses-items', this.expenses);
+      this.getExpIncMoney('.income-items', this.income);
+      this.expensesMonth = this.summExpIncPerMonth(this.expenses, this.expensesMonth);
+      this.incomeMonth = this.summExpIncPerMonth(this.income, this.incomeMonth);
       this.getInfoDeposit();
       this.getAddMoney(additionalIncomeItems, this.addIncome);
       this.getAddMoney(additionalExpensesItem, this.addExpenses);
@@ -156,29 +156,16 @@ const
         button.style.display = 'none';
       }
     };
-    AppData.prototype.getExpenses = function() {
-      let expensesItems = document.querySelectorAll('.expenses-items');
-      expensesItems.forEach((item) => {
-        const itemExpenses = item.querySelector('.expenses-title').value,
-            cashExpenses = item.querySelector('.expenses-amount').value;
-        if(itemExpenses !== '' && cashExpenses !== '') {
-          this.expenses[itemExpenses] = cashExpenses;
+    AppData.prototype.getExpIncMoney = function(inputClass, appDataElem) {
+      let items = document.querySelectorAll(inputClass);
+      console.log(items);
+      items.forEach((item) => {
+        let itemKey = item.childNodes[1].value,
+        itemVal = item.childNodes[3].value;
+        if(itemKey !== '' && itemVal !== '') {
+          appDataElem[itemKey] = itemVal;
         }
       });
-    };
-    AppData.prototype.getIncome = function() {
-      let incomeItems = document.querySelectorAll('.income-items');
-      incomeItems.forEach((item) => {
-        const itemIncome = item.querySelector('.income-title').value,
-            cashIncome = item.querySelector('.income-amount').value;
-        if(itemIncome !== '' && cashIncome !== '') {
-          this.income[itemIncome] = cashIncome;
-        }
-      });
-
-      for (let key in this.income) {
-        this.incomeMonth += +this.income[key];
-      }
     };
     AppData.prototype.getAddMoney = function (items, exportArr) {
       if (typeof (items.value) === 'string') {
@@ -195,11 +182,12 @@ const
           }
       });
     };
-    AppData.prototype.getExpensesMonth = function() {
-      for (let key in this.expenses) {
-        this.expensesMonth += +this.expenses[key];
+    AppData.prototype.summExpIncPerMonth = function(appDataObj, appDataElem) {
+      console.log(appDataObj);
+      for (let key in appDataObj) {
+        appDataElem += +appDataObj[key]; 
       }
-      return this.expensesMonth;
+      return (appDataElem);
     };
     AppData.prototype.getBudget = function() {
       this.budgetMonth = Math.floor(this.budget + this.incomeMonth - this.expensesMonth + (this.moneyDeposit * this.percentDeposit)/12);
