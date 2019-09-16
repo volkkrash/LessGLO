@@ -1,6 +1,7 @@
 "use strict";
 
-let start = document.querySelector('#start'),
+const
+    start = document.querySelector('#start'),
     cancel = document.querySelector('#cancel'),
     addIncomeButton = document.querySelector('.income button'),
     addExpensesButton = document.querySelector('.expenses button'),
@@ -69,8 +70,6 @@ let start = document.querySelector('#start'),
       this.getIncome();
       this.getExpensesMonth();
       this.getInfoDeposit();
-      // this.getAddExpenses();
-      // this.getAddIncome();
       this.getAddMoney(additionalIncomeItems, this.addIncome);
       this.getAddMoney(additionalExpensesItem, this.addExpenses);
       this.getBudget();
@@ -135,10 +134,14 @@ let start = document.querySelector('#start'),
       expensesMonthVal.value = this.expensesMonth;
       additionalExpensesVal.value = this.addExpenses.join(', ');
       additionalIncomeVal.value = this.addIncome.join(', ');
-      targetMonthVal.value = Math.ceil(this.getTargetMonth());
+      if (targetAmount.value !== '') {
+        targetMonthVal.value = Math.ceil(this.getTargetMonth());
+      } else {
+        targetMonthVal.value = 'Цель не указана';
+      }
+      
       incomePeriodVal.value = this.calcPeriod();
 
-      
       periodSelect.addEventListener('input', () => {
         incomePeriodVal.value = this.calcPeriod();
       });
@@ -154,6 +157,7 @@ let start = document.querySelector('#start'),
       }
     };
     AppData.prototype.getExpenses = function() {
+      let expensesItems = document.querySelectorAll('.expenses-items');
       expensesItems.forEach((item) => {
         const itemExpenses = item.querySelector('.expenses-title').value,
             cashExpenses = item.querySelector('.expenses-amount').value;
@@ -163,6 +167,7 @@ let start = document.querySelector('#start'),
       });
     };
     AppData.prototype.getIncome = function() {
+      let incomeItems = document.querySelectorAll('.income-items');
       incomeItems.forEach((item) => {
         const itemIncome = item.querySelector('.income-title').value,
             cashIncome = item.querySelector('.income-amount').value;
@@ -178,11 +183,9 @@ let start = document.querySelector('#start'),
     AppData.prototype.getAddMoney = function (items, exportArr) {
       if (typeof (items.value) === 'string') {
           items = items.value.split(',');
-          console.log(items);
       }
-  
       items.forEach(function (item) {
-          if (typeof item == 'string') {
+          if (typeof item === 'string') {
               item = item.trim();
           } else {
               item = item.value.trim();
@@ -204,7 +207,8 @@ let start = document.querySelector('#start'),
     };
     AppData.prototype.getTargetMonth = function() {
       const monthCompleteMission = targetAmount.value / this.budgetMonth;
-      return monthCompleteMission;
+        return +monthCompleteMission;
+      
     };
     AppData.prototype.getStatusIncome = function() {
       if (this.budgetDay >= 800) {
@@ -225,6 +229,7 @@ let start = document.querySelector('#start'),
     };
     AppData.prototype.calcPeriod = function() {
       return this.budgetMonth * periodSelect.value;
+      
     };
     AppData.prototype.eventsListeners = function() {
       depositCheck.addEventListener('click', () => {
