@@ -59,16 +59,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const handlerMenu = () => {
       if (!isMobile()) {
-            
-                menu.classList.toggle('active-menu');
-            }  else {
-                if(!menu.style.transform || menu.style.transform === `translate(-100%)`) {
-                    menu.style.transform = `translate(0)`;
-                } else {
-                        menu.style.transform = `translate(-100%)`;
-                }
-            }
-      
+        menu.removeAttribute('style');
+        menu.classList.toggle('active-menu');
+        }  else {
+        if(!menu.style.transform || menu.style.transform === `translate(-100%)`) {
+          menu.style.transform = `translate(0)`;
+        } else {
+          menu.style.transform = `translate(-100%)`;
+        }
+      }
     };
     btnMenu.addEventListener('click', handlerMenu);
     closeBtn.addEventListener('click', handlerMenu);
