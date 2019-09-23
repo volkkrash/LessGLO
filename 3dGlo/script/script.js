@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   const isMobile = () => {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    return (screen.width > 480);
     };
 
   const toggleMenu = () => {
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
           menuItems = menu.querySelectorAll('ul>li');
 
     const handlerMenu = () => {
-      if (!isMobile()) {
+      if (isMobile()) {
         menu.removeAttribute('style');
         menu.classList.toggle('active-menu');
         }  else {
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
     popupBtn.forEach((elem) => {
       elem.addEventListener('click', () => {
         popup.style.display = 'block';
-        if (!isMobile()) {
+        if (isMobile()) {
           animatePop(0);
         }
       });
