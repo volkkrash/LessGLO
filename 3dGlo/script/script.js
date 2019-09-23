@@ -81,12 +81,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
           
 
-          const animatePop = (a) => {
+          const animatePop = (a, speed) => {
             requestAnimationFrame(() => {
               if (a < 1) {
                 popup.style.opacity = `${a}`;
-                a += 0.05;
+                a += speed;
                 animatePop(a);
+              } else {
+                a = 1;
               }
             });
           };
@@ -96,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
       elem.addEventListener('click', () => {
         popup.style.display = 'block';
         if (screen.width > 480) {
-          animatePop(0);
+          animatePop(0, 0.05);
         }
       });
     });
