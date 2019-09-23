@@ -46,6 +46,11 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   countTimer('24 September 2019');
 
+
+  const isMobile = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    };
+
   const toggleMenu = () => {
     const btnMenu = document.querySelector('.menu'),
           menu = document.querySelector('menu'),
@@ -53,15 +58,16 @@ document.addEventListener('DOMContentLoaded', function() {
           menuItems = menu.querySelectorAll('ul>li');
 
     const handlerMenu = () => {
-      if (screen.width > 480) {
-        menu.classList.toggle('active-menu');
-      } else {
-        if (!menu.style.transform || menu.style.transform === 'translate(-100%)') {
-          menu.style.transform = 'translate(0)';
-        } else {
-          menu.style.transform = 'translate(-100%)';
-        }
-      }
+      if (!isMobile()) {
+            
+                menu.classList.toggle('active-menu');
+            }  else {
+                if(!menu.style.transform || menu.style.transform === `translate(-100%)`) {
+                    menu.style.transform = `translate(0)`;
+                } else {
+                        menu.style.transform = `translate(-100%)`;
+                }
+            }
       
     };
     btnMenu.addEventListener('click', handlerMenu);
@@ -95,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
     popupBtn.forEach((elem) => {
       elem.addEventListener('click', () => {
         popup.style.display = 'block';
-        if (screen.width > 480) {
+        if (!isMobile()) {
           animatePop(0);
         }
       });
