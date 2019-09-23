@@ -81,14 +81,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
           
 
-          const animatePop = (a, speed) => {
+          const animatePop = (a) => {
             requestAnimationFrame(() => {
               if (a < 1) {
                 popup.style.opacity = `${a}`;
                 a += 0.05;
                 animatePop(a);
-              } else {
-                a = 1;
               }
             });
           };
