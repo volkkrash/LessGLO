@@ -22,7 +22,6 @@ window.addEventListener('DOMContentLoaded', function() {
     };
     const updateClock = () => {
       let timer = getTimeRemaining();
-
       const timeCorrect = (time) => {
         if (time < 10) {
          time = '0' + time;
@@ -33,7 +32,7 @@ window.addEventListener('DOMContentLoaded', function() {
       timerHours.textContent = timeCorrect(timer.hours);
       timerMinutes.textContent = timeCorrect(timer.minutes);
       timerSeconds.textContent = timeCorrect(timer.seconds);
-      let timerId = setInterval(updateClock, 1000);
+      
       if (timer.timeRemaining < 0) {
         clearInterval(timerId);
         timerHours.textContent = '00';
@@ -42,7 +41,7 @@ window.addEventListener('DOMContentLoaded', function() {
       }
       
     };
-    updateClock();
+    let timerId = setInterval(updateClock, 1000);
 
   };
   countTimer('24 September 2019');
@@ -54,28 +53,16 @@ window.addEventListener('DOMContentLoaded', function() {
           menuItems = menu.querySelectorAll('ul>li');
 
     const handlerMenu = () => {
-      const counterMenu = (from, before) => {
-        requestAnimationFrame(() => {
-          if (from < before) {
-            from = from + 5;
-            menu.style.transform = `translate(${from}%)`;
-            counterMenu(from, before);
-          } else if (from === before) {
-            return;
-          } else {
-            from = from - 5;
-            menu.style.transform = `translate(${from}%)`;
-            counterMenu(from, before);
-          }
-        });
-      };
-
-
-      if (!menu.style.transform || menu.style.transform === 'translate(-100%)') {
-        (screen.width > 480) ? counterMenu(-100, 0) : menu.style.transform = 'translate(0)';
+      if (screen.width > 480) {
+        menu.classList.toggle('active-menu');
       } else {
-        (screen.width > 480) ? counterMenu(0, -100) : menu.style.transform = 'translate(-100%)';
+        if (!menu.style.transform || menu.style.transform === 'translate(-100%)') {
+          menu.style.transform = 'translate(0)';
+        } else {
+          menu.style.transform = 'translate(-100%)';
+        }
       }
+      
     };
     btnMenu.addEventListener('click', handlerMenu);
     closeBtn.addEventListener('click', handlerMenu);
@@ -91,9 +78,26 @@ window.addEventListener('DOMContentLoaded', function() {
     const popup = document.querySelector('.popup'),
           popupBtn = document.querySelectorAll('.popup-btn'),
           popupClose = document.querySelector('.popup-close');
+
+          
+
+          const animatePop = (a) => {
+            requestAnimationFrame(() => {
+              if (a < 1) {
+                popup.style.opacity = `${a}`;
+                a += 0.05;
+                animatePop(a);
+              }
+            });
+          };
+
+
     popupBtn.forEach((elem) => {
       elem.addEventListener('click', () => {
         popup.style.display = 'block';
+        if (screen.width > 480) {
+          animatePop(0);
+        }
       });
     });
     popupClose.addEventListener('click', () => {
