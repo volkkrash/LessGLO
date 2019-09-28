@@ -300,8 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const inputValidation = () => {
-      let inputsBlock = document.querySelector('.calc-block');
-      inputsBlock.addEventListener('input', (event) => {
+      calcBlock.addEventListener('input', (event) => {
         let target = event.target;
         console.log('target: ', target);
         if (target.matches('input')) {
