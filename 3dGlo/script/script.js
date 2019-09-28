@@ -298,6 +298,20 @@ document.addEventListener('DOMContentLoaded', () => {
             countSum();
           }
     });
+
+    const inputValidation = () => {
+      let inputsBlock = document.querySelector('.calc-block');
+      inputsBlock.addEventListener('input', (event) => {
+        let target = event.target;
+        console.log('target: ', target);
+        if (target.matches('input')) {
+          target.value = target.value.replace(/\D/g, '');
+        }
+      });
+
+    };
+    inputValidation();
+
   };
   calc(100);
 });
