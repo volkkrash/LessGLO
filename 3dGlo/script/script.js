@@ -366,19 +366,19 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   sendForm();
   const formInputValid = () => {
-    const inputPhone = document.querySelectorAll('input[name="user_phone"]'),
-          inputText = document.querySelectorAll('input[name="user_name"], input[name="user_message"]');
-          console.log('inputText: ', inputText);
-    inputPhone.forEach((item) => {
-      item.addEventListener('input', (event) => {
-          event.target.value = event.target.value.replace(/[^0-9\+]+/g, '');
+
+    const inputs = document.querySelectorAll('form input');
+    inputs.forEach((item) => {
+        item.addEventListener('input', (event) => {
+          let target = event.target;
+          let targetAttrName = target.getAttribute('name');
+          if (targetAttrName === 'user_phone') {
+            target.value = target.value.replace(/[^0-9\+]+/g, '');
+          } else if (targetAttrName === 'user_name' || targetAttrName === 'user_message') {
+            target.value = target.value.replace(/[^а-я\s]+/gi, '');
+          }
+        });
       });
-    });
-    inputText.forEach((item) => {
-      item.addEventListener('input', (event) => {
-          event.target.value = event.target.value.replace(/[^а-я\s]+/gi, '');
-      });
-    });
   };
   formInputValid();
 });
