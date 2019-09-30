@@ -21,8 +21,13 @@ const togglePopUp = () => {
   });
 
   let closePopup = () => {
-    let inputs = popup.querySelectorAll('input');
-    inputs.forEach((item) => {
+    let popupForm = popup.querySelector('form'),
+        popupInputs = popupForm.querySelectorAll('input'),
+        popupFormDiv = popupForm.querySelector('.status-message');
+        if (popupFormDiv !== null) {
+          popupFormDiv.remove();
+        }
+    popupInputs.forEach((item) => {
       item.value = '';
     });
     popup.style.display = 'none';
