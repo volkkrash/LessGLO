@@ -14,7 +14,7 @@ const togglePopUp = () => {
   popupBtn.forEach((elem) => {
     elem.addEventListener('click', () => {
       popup.style.display = 'block';
-      if (isMobile()) {
+      if (screen.width > 480) {
         animatePop(0);
       }
     });

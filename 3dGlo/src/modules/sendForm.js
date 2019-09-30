@@ -5,6 +5,7 @@ const sendForm = () => {
 
   const form = document.querySelectorAll('form[name="user_form"]');
   const statusMessage = document.createElement('div');
+  statusMessage.style.cssText = 'color: #c3c3c3; border-top: 1px solid #fff; border-bottom: 1px solid #fff; border-radius: 5px; display: inline-block; padding: 5px 10px; background-color: rgba(255, 255, 255, .1); margin: 10px;';
 
   form.forEach((item) => {
     item.addEventListener('submit', (event) => {

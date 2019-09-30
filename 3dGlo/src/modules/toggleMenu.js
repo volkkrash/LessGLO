@@ -1,11 +1,9 @@
-import isMobile from './isMobile';
-
 const toggleMenu = () => {
   const menu = document.querySelector('menu'),
         body = document.querySelector('body');
 
   const handlerMenu = () => {
-    if (isMobile()) {
+    if (screen.width > 480) {
       menu.removeAttribute('style');
       menu.classList.toggle('active-menu');
       }  else {
