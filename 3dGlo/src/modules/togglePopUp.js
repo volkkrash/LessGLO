@@ -20,15 +20,23 @@ const togglePopUp = () => {
     });
   });
 
+  let closePopup = () => {
+    let inputs = popup.querySelectorAll('input');
+    inputs.forEach((item) => {
+      item.value = '';
+    });
+    popup.style.display = 'none';
+  };
+
   popup.addEventListener('click', (event) => {
     let target = event.target;
 
     if (target.classList.contains('popup-close')) {
-      popup.style.display = 'none';
+      closePopup();
     } else {
       target = target.closest('.popup-content');
       if (!target) {
-        popup.style.display = 'none';
+        closePopup();
       }
     }
   });
